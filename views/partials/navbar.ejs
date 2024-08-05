@@ -1,10 +1,14 @@
-<div>
-    <a href="/">Dida's Store</a>
-    <nav class="navbar">
-        <ul class="nav-links">
-            <li>Hola</li>
-            <li>Hola</li>
-            <li>Hola</li>
-        </ul>
-    </nav>
+<div class="container">
+  <a href="/">Dida's Store</a>
+  <nav class="navbar">
+    <ul class="nav-links">
+      <% categories.forEach((category) => { %>
+      <li>
+        <a href="/category/<%= category.category_id %>"
+          ><%= category.category_name %></a
+        >
+      </li>
+      <% }) %>
+    </ul>
+  </nav>
 </div>
