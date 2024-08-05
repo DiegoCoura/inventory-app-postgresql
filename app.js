@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
+const path = require("path");
+require("dotenv").config();
 
-const storeRouter = require("./routes/storeRouter")
+const storeRouter = require("./routes/storeRouter");
 
 app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname + "/public")));
 
 const PORT = process.env.PORT || 3000;
 
@@ -13,7 +16,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on PORT: ${PORT}`);
 });
 
-app.use("/", storeRouter)
+app.use("/", storeRouter);
 
 // Throw error if get here
 app.use(function (req, res, next) {
