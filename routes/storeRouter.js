@@ -7,4 +7,6 @@ storeRouter.get("/", storeController.index);
 
 storeRouter.get("/category/:id", storeController.byCategory);
 
+storeRouter.get("/product/:id", storeController.product_detail);
+
 module.exports = storeRouter;
