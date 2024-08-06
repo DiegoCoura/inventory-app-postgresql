@@ -2,7 +2,9 @@
 
 const { Client } = require("pg");
 require("dotenv").config();
-const db = process.argv[2];
+//const db = process.argv[2];
+const db = process.env.LOCAL_DB_STRING;
+
 
 // # populating local db
 // node db/populatedb.js <local-db-url>

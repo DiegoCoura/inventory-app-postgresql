@@ -1,12 +1,14 @@
-<div class="products-container">
-    <% products.forEach((product) => { %>
-        <div class="product-card">
-            <img src="<%= product.image %>" alt="<%= product.product_name %>">
-            <a href=""><%= product.product_name %></a>
-            <p>$ <%= product.price %></p>
-            <button class="blue-btn">Add to Cart</button>
-        </div>
-
-
-    <% }) %>
+<div class="products-grid">
+  <% products.forEach((product) => { %>
+  <div class="product-card">
+    <div class="card-img-container">
+      <img src="<%= product.image %>" alt="<%= product.product_name %>" />
+    </div>
+    <div class="card-footer">
+      <a href=""><%= product.product_name %></a>
+      <p>$ <%= product.price %></p>
+      <button class="blue-btn">Add to Cart</button>
+    </div>
+  </div>
+  <% }) %>
 </div>
