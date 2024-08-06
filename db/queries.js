@@ -5,8 +5,17 @@ exports.getAllProducts = async () => {
   return rows;
 };
 
+exports.getProductById = async (productId) => {
+  const { rows } = await pool.query(
+    "SELECT * FROM products WHERE product_id = ($1)",
+    [productId]
+  );
+  return rows;
+};
+
 exports.getAllCategories = async () => {
   const { rows } = await pool.query("SELECT * FROM categories");
+
   return rows;
 };
 
