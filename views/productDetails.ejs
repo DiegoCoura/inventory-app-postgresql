@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Neucha&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <a href="/">Dida's Store</a>
+    <% if(product !== undefined ){ %>
+    <h2><%= product.product_name %></h2>
+    <img class="product-detail-img" src="<%= product.image %>" alt="<%= product.product_name %>" />
+    <p><%= product.description %></p>
+    <p>$<%= product.price %></p>
+    <button class="blue-btn">Add to Cart</button>
+    <% } %>
+  </body>
+</html>

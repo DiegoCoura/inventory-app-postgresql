@@ -60,3 +60,7 @@ a:hover{
   font-weight: bold;
   cursor: pointer;
 }
+
+.product-detail-img{
+    height: 300px;
+}
