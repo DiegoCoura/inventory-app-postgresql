@@ -111,3 +111,77 @@ exports.product_update_post = [
     }
   }),
 ];
+
+exports.add_product_get = asyncHandler(async (req, res, next) => {
+  const allCategories = await db.getAllCategories();
+  res.render("productForm", {
+    product: "",
+    categories: allCategories,
+  });
+});
+
+exports.add_product_post = [
+  body("product_name", "Product name must not be empty")
+    .trim()
+    .isLength({ min: 5, max: 255 })
+    .escape(),
+  body("image", "Image url must not be empty.")
+    .trim()
+    .isLength({ min: 5, max: 255 })
+    .withMessage("Url must contain at least 5 characters and maximum 255")
+    .isURL()
+    .withMessage("Invalid URL"),
+  body("description", "Description must not be empty.")
+    .trim()
+    .isLength({ min: 10, max: 255 })
+    .withMessage("Description must be minimum 10 characters and maximum 255"),
+  body("category_id", "Invalid category ").escape(),
+  body("price", "Price must not be empty.")
+    .notEmpty()
+    .isNumeric()
+    .isFloat({ min: 1 }),
+  body("quantity", "Quantity must not be empty.")
+    .isNumeric()
+    .withMessage("Must be a number")
+    .isInt({ min: 1 })
+    .withMessage("must be an integer bigger than 0"),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const newInfos = {
+      product_name: req.body.product_name,
+      description: req.body.description.substr(0, 255),
+      price: parseFloat(req.body.price),
+      category_id: +req.body.category_id,
+      image: req.body.image,
+      quantity: +req.body.quantity,
+    }
+
+    if (!errors.isEmpty()) {
+      const allCategories = await db.getAllCategories();
+
+      for (const category of allCategories) {
+        if (category.category_id === newInfos.category_id) {
+          category.checked = "true";
+          newInfos.category_name = category.category_name;
+        }
+      }
+      res.render("productForm", {
+        product: newInfos,
+        categories: allCategories,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const newProduct = await db.addNewProduct(newInfos);
+      res.redirect(`/product/${newProduct[0].product_id}`);
+    }
+  }),
+];
+
+exports.delete_product = asyncHandler(async(req,res, next)=>{
+  const productId = req.body.product_id;
+  const deleteProduct = await db.deleteProduct(productId);
+  console.log("controller:" + deleteProduct)
+  res.redirect("/")
+})
