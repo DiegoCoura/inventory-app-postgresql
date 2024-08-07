@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Neucha&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <a href="/">Dida's Store</a>
+    <form class="product-form" method="post">
+      <label for="product_name">Product name:</label>
+      <input
+        type="text"
+        id="product_name"
+        name="product_name"
+        value="<%= product ? product.product_name : '' %>"
+      />
+      <% locals.errors && errors.forEach((error) => { %>
+        <% if(error.path === "product_name") { %>
+          <span class="input-error-message"><%= error.msg %></span>
+        <% }%>
+      <% }) %>
+
+      <label for="image">Image URL:</label>
+      <input
+        type="text"
+        id="image"
+        name="image"
+        value="<%= product ? product.image : '' %>"
+      />
+      <% locals.errors && errors.forEach((error) => { %>
+        <% if(error.path === "image") { %>
+          <span class="input-error-message"><%= error.msg %></span>
+        <% }%>
+      <% }) %>
+
+      <label for="description">Description:</label>
+      <textarea type="text" id="description" name="description" rows="5">
+      <%= product ? product.description : '' %></textarea>
+      <% locals.errors && errors.forEach((error) => { %>
+        <% if(error.path === "description") { %>
+          <span class="input-error-message"><%= error.msg %></span>
+        <% }%>
+      <% }) %>
+      
+      <label for="category_id">Category:</label>
+      <select name="category_id" id="category_id">
+        <option value="">--Please select an category--</option>
+        <% categories.forEach((category) => { %> <% if (product) { %> <%
+        if(product.category_name === category.category_name) { %>
+        <option value="<%= category.category_id %>" selected>
+          <%= category.category_name %>
+        </option>
+        <% } else { %>
+        <option value="<%= category.category_id %>">
+          <%= category.category_name %>
+        </option>
+        <% } %> <% } else { %>
+        <option value="<%= category.category_id %>">
+          <%= category.category_name %>
+        </option>
+        <% } %> <% }) %>
+      </select>
+      <% locals.errors && errors.forEach((error) => { %> <% if(error.path ===
+      "category_id") { %>
+      <span class="input-error-message"><%= error.msg %></span>
+      <% }%> <% }) %>
+
+      <label for="price">Price:</label>
+      <input
+        type="number"
+        id="price"
+        name="price"
+        step=".01"
+        value="<%= product ? product.price : '' %>"
+      />
+      <% locals.errors && errors.forEach((error) => { %> <% if(error.path ===
+      "price") { %>
+      <span class="input-error-message"><%= error.msg %></span>
+      <% }%> <% }) %>
+
+      <label for="quantity">Quantity in Stock:</label>
+      <input
+        type="number"
+        id="quantity"
+        name="quantity"
+        value="<%= product ? product.quantity : '' %>"
+      />
+      <% locals.errors && errors.forEach((error) => { %> <% if(error.path ===
+      "quantity") { %>
+      <span class="input-error-message"><%= error.msg %></span>
+      <% }%> <% }) %>
+
+      <button type="submit" class="blue-btn">Submit</button>
+    </form>
+  </body>
+</html>
