@@ -64,3 +64,13 @@ a:hover{
 .product-detail-img{
     height: 300px;
 }
+
+.product-form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-error-message{
+  color: tomato;
+}
