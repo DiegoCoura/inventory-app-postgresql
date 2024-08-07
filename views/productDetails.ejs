@@ -10,15 +10,33 @@
   </head>
   <body>
     <a href="/">Dida's Store</a>
-    <% if(product !== undefined ){ %>
-    <h2><%= product.product_name %></h2>
-    <img class="product-detail-img" src="<%= product.image %>" alt="<%= product.product_name %>" />
-    <p><%= product.description %></p>
-    <p>$<%= product.price %></p>
-    <button class="blue-btn">Add to Cart</button>
-    <br>
-    <a href="/product/edit/<%= product.product_id %>">Edit Product</a>
-    <a href="/product/delete/<%= product.product_id %>">Delete Product</a>
-    <% } %>
+    <div class="detail-container">
+      <% if(product !== undefined ){ %>
+      <div class="detail-left-container">
+        <h2><%= product.product_name %></h2>
+        <img
+          class="product-detail-img"
+          src="<%= product.image %>"
+          alt="<%= product.product_name %>"
+        />
+        <p>Price: $<%= product.price %></p>
+        <button class="blue-btn">Add to Cart</button>
+      </div>
+      <div class="detail-right-container">
+        <p>Description: <%= product.description %></p>
+        <a class="blue-btn" href="/product/edit/<%= product.product_id %>"
+          >Edit Product</a
+        >
+        <form action="/product/delete/<%= product.product_id %>" method="post">
+          <input
+            type="hidden"
+            value="<%= product.product_id %>"
+            name="product_id"
+          />
+          <button type="submit" class="blue-btn delete">Delete Product</button>
+        </form>
+      </div>
+      <% } %>
+    </div>
   </body>
 </html>
