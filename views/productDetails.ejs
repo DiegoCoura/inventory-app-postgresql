@@ -16,6 +16,9 @@
     <p><%= product.description %></p>
     <p>$<%= product.price %></p>
     <button class="blue-btn">Add to Cart</button>
+    <br>
+    <a href="/product/edit/<%= product.product_id %>">Edit Product</a>
+    <a href="/product/delete/<%= product.product_id %>">Delete Product</a>
     <% } %>
   </body>
 </html>
