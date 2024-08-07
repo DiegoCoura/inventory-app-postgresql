@@ -13,6 +13,22 @@ exports.getProductById = async (productId) => {
   return rows;
 };
 
+exports.addNewProduct = async (productInfos) => {
+  const { rows } = await pool.query(
+    "INSERT INTO products (product_name, description, category_id, price, image, quantity) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+    [
+      productInfos.product_name,
+      productInfos.description,
+      productInfos.category_id,
+      productInfos.price,
+      productInfos.image,
+      productInfos.quantity,
+    ]
+  );
+
+  return rows;
+};
+
 exports.getAllCategories = async () => {
   const { rows } = await pool.query("SELECT * FROM categories");
 
@@ -41,4 +57,13 @@ exports.updateProduct = async (newInfos) => {
     ]
   );
   return;
+};
+
+exports.deleteProduct = async (productId) => {
+  const { rows } = await pool.query(
+    "DELETE FROM products WHERE product_id = ($1) RETURNING product_id",
+    [productId]
+  );
+  console.log("query: ", rows);
+  return rows;
 };
