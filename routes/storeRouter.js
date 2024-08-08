@@ -15,6 +15,12 @@ storeRouter.post("/product/edit/:id", storeController.product_update_post);
 
 storeRouter.post("/product/delete/:id", storeController.delete_product);
 
+storeRouter.get("/category/new", storeController.add_category_get);
+
+storeRouter.post("/category/new", storeController.add_category_post);
+
+storeRouter.post("/category/delete/:id", storeController.delete_category);
+
 storeRouter.get("/category/:id", storeController.byCategory);
 
 storeRouter.get("/product/:id", storeController.product_detail);
