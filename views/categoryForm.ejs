@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Neucha&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <a href="/" class="home-link"><h1>Dida's Store</h1></a>
+    <div class="form-container">
+      <form action="/category/new" method="post" class="product-form">
+        <label for="category_name">Category: </label>
+        <input type="text" name="category_name" id="category_name" />
+
+        <% locals.errors && errors.forEach((error) => { %>
+        <span class="input-error-message"><%= error.msg %></span>
+        <% }) %>
+
+        <button type="submit" class="blue-btn">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
