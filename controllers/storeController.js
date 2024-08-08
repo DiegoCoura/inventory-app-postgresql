@@ -15,11 +15,13 @@ exports.index = asyncHandler(async (req, res, next) => {
 });
 
 exports.byCategory = asyncHandler(async (req, res, next) => {
+  const categoryId = req.params.id;
   const allCategories = await db.getAllCategories();
-  const categoryProducts = await db.getCategoryById(req.params.id);
+  const categoryProducts = await db.getCategoryById(categoryId);
 
   res.render("index", {
     categories: allCategories,
+    category_id: categoryId,
     products: categoryProducts,
   });
 });
@@ -155,7 +157,7 @@ exports.add_product_post = [
       category_id: +req.body.category_id,
       image: req.body.image,
       quantity: +req.body.quantity,
-    }
+    };
 
     if (!errors.isEmpty()) {
       const allCategories = await db.getAllCategories();
@@ -179,9 +181,43 @@ exports.add_product_post = [
   }),
 ];
 
-exports.delete_product = asyncHandler(async(req,res, next)=>{
+exports.delete_product = asyncHandler(async (req, res, next) => {
   const productId = req.body.product_id;
   const deleteProduct = await db.deleteProduct(productId);
-  console.log("controller:" + deleteProduct)
-  res.redirect("/")
-})
+ 
+  res.redirect("/");
+});
+
+exports.add_category_get = asyncHandler(async (req, res, next) => {
+  res.render("categoryForm");
+});
+
+exports.add_category_post = [
+  body("category_name")
+    .trim()
+    .isLength({ min: 5, max: 255 })
+    .withMessage(
+      "Category name must contain at least 5 characters and maximum of 255."
+    )
+    .escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const newCategory = req.body.category_name;
+
+    if (!errors.isEmpty()) {
+      res.render("categoryForm", {
+        category: newCategory,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const addCategory = await db.addCategory(newCategory);      
+      res.redirect("/");
+    }
+  }),
+];
+
+exports.delete_category = asyncHandler(async (req, res, next) => {
+  const deleteCategory = await db.deleteCategory(req.body.category_id);  
+  res.redirect("/");
+});
