@@ -1,4 +1,5 @@
 body {
+  margin: 0;
   background-color: #f6f6f6;
   font-family: "Open Sans", sans-serif;
 }
@@ -9,18 +10,40 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+.nav-container {
+  padding: 20px 10px 5px;
+  background: #eaeaea;
+  margin-bottom: 10px;
 }
 
 .nav-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.nav-header-add-section {
+  display: flex;
+  gap: 10px;
 }
 
 .nav-links {
   display: flex;
   justify-content: space-around;
   list-style: none;
+}
+
+.nav-categories {
+  padding: 5px 15px;
+  border-radius: 8px;
+  transition: 0.2s ease-out;
+}
+
+.nav-categories:hover {
+  background: white;
 }
 
 .products-grid {
@@ -65,7 +88,7 @@ a:hover {
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s ease-out;
-  font-size: medium;
+  font-size: small;
 }
 
 .blue-btn:hover {
@@ -130,4 +153,10 @@ a:hover {
   justify-content: flex-start;
   gap: 1rem;
   max-width: 500px;
+}
+
+.delete-category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

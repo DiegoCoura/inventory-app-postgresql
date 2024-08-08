@@ -1,13 +1,16 @@
-<div class="container">
+<div class="nav-container">
   <div class="nav-header">
-    <a href="/">Dida's Store</a>
-    <a href="/product/new">Add Product</a>
+    <a href="/" class="home-link"><h1>Dida's Store</h1></a>
+    <div class="nav-header-add-section">
+      <a href="/product/new" class="blue-btn">Add Product</a>
+      <a href="/category/new" class="blue-btn">Add Category</a>
+    </div>
   </div>
   <nav class="navbar">
     <ul class="nav-links">
       <% categories.forEach((category) => { %>
       <li>
-        <a href="/category/<%= category.category_id %>"
+        <a href="/category/<%= category.category_id %>" class="nav-categories"
           ><%= category.category_name %></a
         >
       </li>
